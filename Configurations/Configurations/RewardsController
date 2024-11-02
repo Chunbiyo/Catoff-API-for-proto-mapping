@@ -1,0 +1,8 @@
+const Rewards = require('../models/Rewards');
+
+const getRewards = async (req, res) => {
+  const rewards = await Rewards.find();
+  res.json(rewards);
+};
+
+module.exports = { getRewards };
