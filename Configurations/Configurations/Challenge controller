@@ -1,0 +1,19 @@
+const Challenge = require('../models/Challenge');
+
+const createChallenge = async (req, res) => {
+  const { title, description, duration, rewardStructure } = req.body;
+
+  const challenge = await Challenge.create({ title, description, duration, rewardStructure });
+  if (challenge) {
+    res.status(201).json(challenge);
+  } else {
+    res.status(400).json({ message: 'Invalid challenge data' });
+  }
+};
+
+const getChallenges = async (req, res) => {
+  const challenges = await Challenge.find();
+  res.json(challenges);
+};
+
+module.exports = { createChallenge, getChallenges };
