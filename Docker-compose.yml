@@ -1,0 +1,25 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: catoff_api
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/catoff
+      - JWT_SECRET=your_jwt_secret
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:5
+    container_name: catoff_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
